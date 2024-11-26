@@ -6,7 +6,7 @@
 /*   By: mlitvino <mlitvino@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 13:35:49 by mlitvino          #+#    #+#             */
-/*   Updated: 2024/11/25 15:16:52 by mlitvino         ###   ########.fr       */
+/*   Updated: 2024/11/26 15:57:17 by mlitvino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,9 @@
 # include <unistd.h>
 
 #ifndef BUFFER_SIZE
-# define BUFFER_SIZE 42
+# define BUFFER_SIZE 20
 #endif
+
 char	*get_next_line(int fd);
 
 #endif
