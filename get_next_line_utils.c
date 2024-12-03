@@ -6,7 +6,7 @@
 /*   By: mlitvino <mlitvino@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 17:59:36 by mlitvino          #+#    #+#             */
-/*   Updated: 2024/12/02 19:46:37 by mlitvino         ###   ########.fr       */
+/*   Updated: 2024/12/03 17:08:28 by mlitvino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,9 @@ char	*ft_substr(char *buffer, int *buf_len)
 	new_line[i] = '\0';
 	j = 0;
 	while (buffer[i])
-	{
-		buffer[j] = buffer[i];
-		j++;
-		i++;
-	}
+		buffer[j++] = buffer[i++];
 	buffer[j] = '\0';
+	ft_strlen(buffer);
 	return (new_line);
 }
 
@@ -71,7 +68,7 @@ int	ft_strchr(char *buffer, int *buf_len)
 		return (-1);
 	while (i < *buf_len)
 	{
-		if (buffer[i] == '\n' || buffer[i] == '\0')
+		if (buffer[i] == '\n'|| buffer[i] == '\0')
 		{
 			*buf_len = i;
 			return (1);
@@ -102,7 +99,7 @@ char	*ft_realloc(char *buffer, int *new_size)
 	ft_bzero(new_buffer + buf_size, BUFFER_SIZE + 1);
 	if (buffer == NULL)
 		ft_bzero(new_buffer, BUFFER_SIZE);
-	if (buffer != NULL)
-		free(buffer);
-	return (new_buffer);
+	// if (buffer != NULL)
+	// 	free(buffer);
+	return (free(buffer), new_buffer);
 }
