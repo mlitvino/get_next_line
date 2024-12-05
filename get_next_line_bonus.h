@@ -30,5 +30,4 @@ char	**ft_init_buf(char **buf_tab, int *buf_len);
 char	*ft_read(char ***buf_tab, int fd, int tab_len, int *buf_len);
 char	**ft_realloc_buf_tab(char **old_tab, int *old_size, int new_size);
 
-
 #endif
