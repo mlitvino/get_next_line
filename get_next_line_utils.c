@@ -6,13 +6,13 @@
 /*   By: mlitvino <mlitvino@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 17:59:36 by mlitvino          #+#    #+#             */
-/*   Updated: 2024/12/03 17:08:28 by mlitvino         ###   ########.fr       */
+/*   Updated: 2024/12/04 17:47:34 by mlitvino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-void	ft_bzero(char *buffer, int size)
+void	ft_bzero_buf(char *buffer, int size)
 {
 	if (buffer == NULL)
 		return ;
@@ -23,7 +23,7 @@ void	ft_bzero(char *buffer, int size)
 	}
 }
 
-int	ft_strlen(char *buffer)
+int	ft_strlen_buf(char *buffer)
 {
 	int	len;
 
@@ -35,7 +35,7 @@ int	ft_strlen(char *buffer)
 	return (len);
 }
 
-char	*ft_substr(char *buffer, int *buf_len)
+char	*ft_sub_buf(char *buffer, int *buf_len, char ***buf_tab, int tab_len)
 {
 	char	*new_line;
 	int		i;
@@ -44,7 +44,7 @@ char	*ft_substr(char *buffer, int *buf_len)
 	i = 0;
 	new_line = (char *)malloc(sizeof(char) * (*buf_len + 2));
 	if (new_line == NULL)
-		return (NULL);
+		return (free_buf(buf_tab, tab_len), NULL);
 	while (i <= *buf_len)
 	{
 		new_line[i] = buffer[i];
@@ -55,20 +55,19 @@ char	*ft_substr(char *buffer, int *buf_len)
 	while (buffer[i])
 		buffer[j++] = buffer[i++];
 	buffer[j] = '\0';
-	ft_strlen(buffer);
 	return (new_line);
 }
 
-int	ft_strchr(char *buffer, int *buf_len)
+int	ft_strchr_buf(char *buffer, int *buf_len)
 {
 	int	i;
 
 	i = 0;
-	if (!buffer || *buf_len <= 0)
+	if (buffer == NULL || *buf_len <= 0)
 		return (-1);
 	while (i < *buf_len)
 	{
-		if (buffer[i] == '\n'|| buffer[i] == '\0')
+		if (buffer[i] == '\n' || buffer[i] == '\0')
 		{
 			*buf_len = i;
 			return (1);
@@ -78,14 +77,14 @@ int	ft_strchr(char *buffer, int *buf_len)
 	return (-1);
 }
 
-char	*ft_realloc(char *buffer, int *new_size)
+char	*ft_realloc_buf(char *buffer, int *new_size)
 {
 	char	*new_buffer;
 	int		i;
 	int		buf_size;
 
 	i = 0;
-	buf_size = ft_strlen(buffer);
+	buf_size = ft_strlen_buf(buffer);
 	new_buffer = (char *)malloc(sizeof(char) * (buf_size + BUFFER_SIZE + 1));
 	if (new_buffer == NULL)
 		return (NULL);
@@ -96,10 +95,6 @@ char	*ft_realloc(char *buffer, int *new_size)
 		new_buffer[i] = buffer[i];
 		i++;
 	}
-	ft_bzero(new_buffer + buf_size, BUFFER_SIZE + 1);
-	if (buffer == NULL)
-		ft_bzero(new_buffer, BUFFER_SIZE);
-	// if (buffer != NULL)
-	// 	free(buffer);
+	ft_bzero_buf(new_buffer + buf_size, BUFFER_SIZE + 1);
 	return (free(buffer), new_buffer);
 }
